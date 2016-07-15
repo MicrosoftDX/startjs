@@ -5,8 +5,13 @@ let cli = require('./lib'),
     minimist = require('minimist');
 
 var argv = (minimist)(process.argv.slice(2));
-cli(argv, (err) => {
-    if (err) console.error(err);
 
-    process.exit(0);
+if (argv._.length === 0) {
+    return console.log('usage:  startjs <path to app> [--name <docker registry name>]');
+}
+
+cli(argv, (err) => {
+    if (err) {
+        console.error('ERROR: ' + err);
+    }
 });
