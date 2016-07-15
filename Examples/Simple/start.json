@@ -1,0 +1,5 @@
+{
+    "portMap" : [
+        { "FrontDoor" : 8000 }
+    ]
+}
