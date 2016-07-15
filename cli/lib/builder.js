@@ -44,9 +44,6 @@ CMD ["node", "${packageJson.main}"]`;
 
     let dockerfilePath = `${dockerfileDirectory}/Dockerfile`;
 
-    console.log(dockerfileDirectory);
-    console.log(dockerfilePath);
-
     fs.writeFileSync(dockerfilePath, dockerfile);
 
     if (options['name']) {
