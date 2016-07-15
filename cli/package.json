@@ -1,6 +1,6 @@
 {
   "name": "startjs",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "StartJS CLI",
   "main": "index.js",
   "scripts": {

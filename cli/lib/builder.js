@@ -7,7 +7,10 @@ const exec = require('child_process').exec;
 function loadJson(path, name) {
     let jsonPath = `${path}/${name}`;
 
-    return require(jsonPath);
+    let jsonFile = fs.readFileSync(jsonPath, 'utf8');
+    if (!jsonFile) return;
+
+    return JSON.parse(jsonFile);
 }
 
 module.exports = function build(path, options, callback) {
