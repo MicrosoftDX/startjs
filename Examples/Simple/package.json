@@ -11,5 +11,8 @@
     "example"
   ],
   "author": "johnshew on twitter",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
 }
