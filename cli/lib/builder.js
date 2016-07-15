@@ -35,16 +35,19 @@ ${exposes}
 CMD ["npm", "install"]
 CMD ["node", "${packageJson.main}"]`;
 
-    let dockerfilePath = ".";
+    let dockerfileDirectory = path;
     if (options['o'])
-        dockerfilePath = options['o'];
+        dockerfileDirectory = options['o'];
 
-    dockerfilePath += `/Dockerfile`;
+    let dockerfilePath = `${dockerfileDirectory}/Dockerfile`;
+
+    console.log(dockerfileDirectory);
+    console.log(dockerfilePath);
 
     fs.writeFileSync(dockerfilePath, dockerfile);
 
     if (options['name']) {
-        let buildCmd = `docker build -t ${options['name']} ${dockerfilePath}`;
+        let buildCmd = `docker build -t ${options['name']} ${dockerfileDirectory}`;
         exec(buildCmd, function(err, stdout, stderr) {
             if (err) return callback(err);
 
