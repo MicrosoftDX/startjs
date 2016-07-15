@@ -1,5 +1,5 @@
 {
-  "name": "startjs-cli",
+  "name": "startjs",
   "version": "1.0.0",
   "description": "StartJS CLI",
   "main": "index.js",

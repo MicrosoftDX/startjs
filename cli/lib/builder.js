@@ -2,6 +2,7 @@
 
 const path = require('path');
 const fs = require('fs');
+const exec = require('child_process').exec;
 
 function loadJson(path, name) {
     let jsonPath = `${path}/${name}`;
@@ -31,6 +32,7 @@ WORKDIR /src
 ADD . .
 
 ${exposes}
+CMD ["npm", "install"]
 CMD ["node", "${packageJson.main}"]`;
 
     let outputPath = ".";
@@ -41,5 +43,15 @@ CMD ["node", "${packageJson.main}"]`;
 
     fs.writeFileSync(outputPath, dockerfile);
 
-    return callback();
+    if (options['name']) {
+        let buildCmd = `docker build -t ${options['name']}`;
+        exec(buildCmd, function(err, stdout, stderr) {
+            if (err) return callback(err);
+
+            let pushCmd = `docker push ${options['name']}`;
+            exec(pushCmd, callback);
+        });
+    } else {
+        return callback();
+    }
 }
