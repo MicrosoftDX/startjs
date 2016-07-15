@@ -1,5 +1,6 @@
 {
     "portMap" : [
-        { "FrontDoor" : 8000 }
+        { "FrontDoor" : 8000 },
+        { "LogServer" : 8090 }
     ]
 }
