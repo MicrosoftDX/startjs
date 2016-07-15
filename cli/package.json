@@ -1,0 +1,16 @@
+{
+  "name": "startjs-cli",
+  "version": "1.0.0",
+  "description": "StartJS CLI",
+  "main": "index.js",
+  "scripts": {
+  },
+  "bin": {
+    "startjs": "./startjs"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "minimist": "^1.2.0"
+  }
+}

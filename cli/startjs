@@ -1,0 +1,12 @@
+#!/usr/bin/env node
+'use strict'
+
+let cli = require('./lib'),
+    minimist = require('minimist');
+
+var argv = (minimist)(process.argv.slice(2));
+cli(argv, (err) => {
+    if (err) console.error(err);
+
+    process.exit(0);
+});
