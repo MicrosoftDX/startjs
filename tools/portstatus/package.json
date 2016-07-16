@@ -1,0 +1,17 @@
+{
+  "name": "portstatus-cli",
+  "version": "1.0.0",
+  "description": "StartJS service port status utility",
+  "main": "index.js",
+  "scripts": {
+  },
+  "bin": {
+    "portstatus": "./portstatus"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "minimist": "^1.2.0",
+    "request": "^2.73.0"
+  }
+}
