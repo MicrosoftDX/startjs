@@ -11,6 +11,7 @@
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <script src="javascripts/deploy.js"></script>
   </head>
   <body>
     <div class="wrapper">
@@ -29,9 +30,14 @@
       </header>
       <section>
         <h1>
-<a id="hello-world" class="anchor" href="#hello-world" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Hello world</h1>
+        <a id="hello-world" class="anchor" href="#hello-world" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Deploy a node application to Marathon</h1>
 
-<p>Deploy a node application to Azure Container Serivces.</p>
+        <form name="deployer" onsubmit="deploy()">
+          Name to give the job: <input type="text" name="jobName"><br/>
+          URL of Marathon instance: <input type="text" name="url"><br/>
+          <input type="submit" value="Submit"><br/>
+        </form>
+
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/MicrosoftDX">MicrosoftDX</a></p>
@@ -39,6 +45,6 @@
       </footer>
     </div>
     <script src="javascripts/scale.fix.js"></script>
-    
+
   </body>
 </html>
