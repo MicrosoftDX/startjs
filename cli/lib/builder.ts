@@ -5,8 +5,10 @@ import * as exec from 'child_process';
 
 export type PortMapping = { EndpointName: string, Port: number };
 export type StartJson = { "portMap": PortMapping[] };
+export type ErrorCallback = (string?) => void;
 
-function loadJson(path: string, name: string) {
+function loadJson(path: string, name: string)
+{
     let jsonPath = `${path}/${name}`;
 
     let jsonFile = fs.readFileSync(jsonPath, 'utf8');
@@ -15,7 +17,8 @@ function loadJson(path: string, name: string) {
     return JSON.parse(jsonFile);
 }
 
-function makeDockerfileText(packageJson: any, startJson: StartJson) {
+function makeDockerfileText(packageJson: any, startJson: StartJson)
+{
     const exposes = startJson.portMap
         .map((mapping) => { return `EXPOSE ${mapping.Port}` })
         .join("\n");
@@ -34,38 +37,50 @@ CMD ["node", "${packageJson.main}"]`;
     return dockerfile;
 }
 
-export function build(path: string, options: any, callback: (string?) => void) {
-    const packageJson = loadJson(path, "package.json");
+export function writeDockerFile(projectPath: string, outputPath: string,
+                                callback: ErrorCallback): void
+{
+    const packageJson = loadJson(projectPath, "package.json");
     if (!packageJson) {
-        return callback(`couldn't find package.json on path ${path}`);
+        return callback(`couldn't find package.json on path ${projectPath}`);
     }
 
-    const startJson = <StartJson>loadJson(path, "start.json");
+    const startJson = <StartJson>loadJson(projectPath, "start.json");
     if (!startJson) {
-        return callback(`couldn't find start.json on path ${path}`);
+        return callback(`couldn't find start.json on path ${projectPath}`);
     }
 
     const dockerfileText = makeDockerfileText(packageJson, startJson);
 
-    let dockerfileDirectory = path;
-    if (options['o']) {
-        dockerfileDirectory = options['o'];
-    }
-
-    const dockerfilePath = `${dockerfileDirectory}/Dockerfile`;
+    const dockerfilePath = `${outputPath}/Dockerfile`;
 
     fs.writeFileSync(dockerfilePath, dockerfileText);
+}
 
-    if (options['name']) {
-        const buildCmd =
-            `docker build -t ${options['name']} ${dockerfileDirectory}`;
-        exec.exec(buildCmd, function(err, stdout, stderr) {
+export function build(projectPath: string, registryName: string,
+                      callback: ErrorCallback): void
+{
+    const buildCmd = `docker build -t ${registryName} ${projectPath}`;
+
+    exec.exec(buildCmd, function(err, stdout, stderr) {
+        if (err) callback(err);
+        else callback();
+    });
+}
+
+export function buildAndPush(projectPath: string, registryName: string,
+                     callback: ErrorCallback)
+{
+    build(
+        projectPath,
+        registryName,
+        (err) => {
             if (err) return callback(err);
 
-            const pushCmd = `docker push ${options['name']}`;
+            const pushCmd = `docker push ${registryName}`;
+
             exec.exec(pushCmd, callback);
         });
-    } else {
-        return callback();
-    }
 }
+
+

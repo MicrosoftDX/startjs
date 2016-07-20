@@ -1,5 +1,7 @@
 {
   "globalDependencies": {
-    "node": "registry:dt/node#6.0.0+20160720070758"
+    "form-data": "registry:dt/form-data#0.0.0+20160316155526",
+    "node": "registry:dt/node#6.0.0+20160720070758",
+    "request": "registry:dt/request#0.0.0+20160524135346"
   }
 }

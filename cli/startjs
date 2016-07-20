@@ -1,18 +1,17 @@
 #!/usr/bin/env node
 'use strict'
 
-let cli = require('./dist'),
+var cli = require('./dist'),
     minimist = require('minimist');
 
 if (require.main === module) {
     var argv = (minimist)(process.argv.slice(2));
 
     if (argv._.length === 0) {
-        console.log(
-            'usage:  startjs <path to app> [--name <docker registry name>]');
+        console.log(cli.usage);
     }
 
-    cli(argv, (err) => {
+    cli.cli(argv, function(err) {
         if (err) {
             console.error('ERROR: ' + err);
         }
