@@ -1,6 +1,6 @@
 {
     "portMap" : [
-        { "FrontDoor" : 8000 },
-        { "LogServer" : 8090 }
+        { "EndpointName": "FrontDoor", "Port": 8000 },
+        { "EndpointName": "LogServer", "Port": 8090 }
     ]
 }

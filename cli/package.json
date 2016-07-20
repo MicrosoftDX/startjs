@@ -4,6 +4,9 @@
   "description": "StartJS CLI",
   "main": "index.js",
   "scripts": {
+    "typings": "typings install",
+    "build": "tsc -p .",
+    "start": "./startjs"
   },
   "bin": {
     "startjs": "./startjs"
@@ -12,5 +15,9 @@
   "license": "MIT",
   "dependencies": {
     "minimist": "^1.2.0"
+  },
+  "devDependencies": {
+    "typescript": "^1.8.10",
+    "typings": "^1.3.1"
   }
 }
