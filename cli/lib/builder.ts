@@ -25,13 +25,13 @@ function makeDockerfileText(packageJson: any, startJson: StartJson)
 
     const dockerfile =
 `# TODO: parameterize node.js version from "engines" in package.json
-FROM mhart/alpine-node:6
+FROM node
 
 WORKDIR /src
 ADD . .
 
 ${exposes}
-CMD ["npm", "install"]
+RUN npm install
 CMD ["node", "${packageJson.main}"]`;
 
     return dockerfile;
